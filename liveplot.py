@@ -86,6 +86,7 @@ class MyDataFetchClass(threading.Thread):
 
 
 	def run(self):
+		NbDotMax = 100
 		while True:
 			new_data = self._cortex.ws.recv()        
 			#print(new_data)
@@ -95,7 +96,23 @@ class MyDataFetchClass(threading.Thread):
 				chan = chan.T
 				chan.reshape(14,1)
 				print(chan.shape)
-				self._dataClass.XData.append(self._dataClass.XData[-1] + 1)
+				if len(self._dataClass.XData) > 100:
+					self._dataClass.YData0.pop(0)
+					self._dataClass.YData1.pop(0)
+					self._dataClass.YData2.pop(0)
+					self._dataClass.YData3.pop(0)
+					self._dataClass.YData4.pop(0)
+					self._dataClass.YData5.pop(0)
+					self._dataClass.YData6.pop(0)
+					self._dataClass.YData7.pop(0)
+					self._dataClass.YData8.pop(0)
+					self._dataClass.YData9.pop(0)
+					self._dataClass.YData10.pop(0)
+					self._dataClass.YData11.pop(0)
+					self._dataClass.YData12.pop(0)
+					self._dataClass.YData13.pop(0)
+				else:
+					self._dataClass.XData.append(self._dataClass.XData[-1] + 1)
 				self._dataClass.YData0.append(chan[0])
 				self._dataClass.YData1.append(chan[1])
 				self._dataClass.YData2.append(chan[2])
