@@ -39,7 +39,7 @@ sub_request_json = {
 		"cortexToken": cortex.auth,
 		"session": cortex.session_id,
 		"streams": streams
-	}, 
+	},
 	"id": key.SUB_REQUEST_ID
 }
 
