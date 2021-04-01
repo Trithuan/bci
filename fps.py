@@ -13,31 +13,33 @@ print("licence :", key.licence)
 print("client_id :", key.client_id)
 print("client_secret :", key.client_secret)
 
-streams = ['eeg']
+
 cortex = Cortex(key.user, debug_mode=True)
 cortex.do_prepare_steps()
-sub_request_json = {
-	"jsonrpc": "2.0", 
-	"method": "subscribe", 
-	"params": { 
-		"cortexToken": cortex.auth,
-		"session": cortex.session_id,
-		"streams": streams
-	},
-	"id": key.SUB_REQUEST_ID
-}
-
+streams = ['eeg']
 print('subscribe request --------------------------------')
-cortex.ws.send(json.dumps(sub_request_json))
+cortex.ws.send(json.dumps(key.sub_request_json))
+
+
+
+while True:
+	start_time = time.time()
+	new_data = cortex.ws.recv()
+	flux = json.loads(new_data)
+	if 'eeg' in flux.keys():
+		print("FPS: ", 1.0 / (time.time() - start_time))
+
+
 
 #affichage
 
-data = MyDataClass()
-plt.figure(figsize=(15,9))
-plotter = MyPlotClass(data)
-fetcher = MyDataFetchClass(data, cortex)
-fetcher.start()
-plt.show()
+# data = MyDataClass()
+# plt.figure(figsize=(12,8))
+# plotter = MyPlotClass(data)
+# fetcher = MyDataFetchClass(data, cortex)
+
+# fetcher.start()
+# plt.show()
 
 
 

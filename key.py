@@ -25,3 +25,11 @@ SENSITIVITY_REQUEST_ID              =   15
 MENTAL_COMMAND_ACTIVE_ACTION_ID     =   16
 MENTAL_COMMAND_BRAIN_MAP_ID         =   17
 MENTAL_COMMAND_TRAINING_THRESHOLD   =   18
+
+
+user = {
+	"license" : licence,
+	"client_id" : client_id,
+	"client_secret" : client_secret,
+	"debit" : 10
+}
